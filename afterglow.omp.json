@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    {
+      "type": "prompt", "alignment": "left", "newline": true,
+      "segments": [
+        { "type": "path", "style": "plain", "foreground": "#f2a0a9", "template": "<#8d7f90>╭─</> {{ .Path }}", "options": { "style": "full" } },
+        { "type": "git", "style": "plain", "foreground": "#d0b1ed", "template": " <#8d7f90>──</> {{ .HEAD }}<#f8c892>{{ if gt .Working.Modified 0 }}  {{ .Working.Modified }}{{ end }}{{ if gt .Working.Added 0 }}  {{ .Working.Added }}{{ end }}{{ if gt .Working.Deleted 0 }}  {{ .Working.Deleted }}{{ end }}{{ if gt .Working.Untracked 0 }}  {{ .Working.Untracked }}{{ end }}{{ $conflicts := max .Working.Unmerged .Staging.Unmerged }}{{ if gt $conflicts 0 }}  {{ $conflicts }}{{ end }}{{ $staged := add .Staging.Added .Staging.Modified .Staging.Deleted }}{{ if gt $staged 0 }}  {{ $staged }}{{ end }}{{ if gt .Ahead 0 }}  {{ .Ahead }}{{ end }}{{ if gt .Behind 0 }}  {{ .Behind }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} {{ end }}</>", "options": { "branch_icon": " ", "commit_icon": " ", "tag_icon": " ", "merge_icon": " ", "rebase_icon": " ", "fetch_status": true, "fetch_stash_count": true } }
+      ]
+    },
+    {
+      "type": "prompt", "alignment": "left", "newline": true,
+      "segments": [
+        { "type": "node", "style": "plain", "foreground": "#f8c892", "template": "<#8d7f90>│</>  node {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}" },
+        { "type": "executiontime", "style": "plain", "foreground": "#8d7f90", "template": "{{ if .Segments.Contains \"Node\" }} · {{ else }}│  {{ end }}{{ .FormattedMs }}", "options": { "threshold": 500, "style": "austin" } }
+      ]
+    },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "text", "style": "plain", "foreground": "#f2a0a9", "template": "<#8d7f90>╰─</> ❯" }
+    ] }
+  ]
+}

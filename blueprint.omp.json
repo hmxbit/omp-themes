@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "path", "style": "plain", "foreground": "#e0e5e9", "template": "<#838f99>┌─</> {{ .Path }} <#838f99>────────────────</>", "options": { "style": "full" } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "git", "style": "plain", "foreground": "#c4cbd5", "template": "<#838f99>│</>  <#a5bdd0>git</>  {{ .HEAD }}<#b8d5b5>{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Unmerged }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} ✓ clean{{ end }}</>", "options": { "branch_icon": " ", "fetch_status": true } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "python", "style": "plain", "foreground": "#c4cbd5", "template": "<#838f99>│</>  <#a5bdd0>env</>  python {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}", "options": { "display_mode": "context" } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "text", "style": "plain", "foreground": "#e0e5e9", "template": "<#838f99>└─</> ›" }
+    ] }
+  ]
+}

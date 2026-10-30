@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Prompt Studio — Oh My Posh theme previews</title>
+  <style>
+    :root { color-scheme: dark; --bg: #0c0e13; --panel: #151820; --border: #292d38; --muted: #9298a8; --ink: #f0f1f5; --accent: #c8f374; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.5; }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .wrap { max-width: 1440px; margin: auto; padding: 0 48px; }
+    header { border-bottom: 1px solid var(--border); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 750; letter-spacing: -.03em; }
+    .brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 9px; background: var(--accent); color: #17200d; font: bold 17px ui-monospace, monospace; }
+    .nav-note, .eyebrow, .label, .terminal-title, .card-number, .tag, .footnote { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .nav-note { font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+    .nav-note span { color: var(--accent); }
+    .hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; padding-top: 81px; padding-bottom: 65px; }
+    .eyebrow { color: var(--accent); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ''; display: inline-block; width: 23px; height: 1px; background: currentColor; vertical-align: middle; margin-right: 10px; }
+    h1 { font-size: clamp(44px, 6vw, 78px); line-height: 1.02; letter-spacing: -.065em; margin: 20px 0 19px; font-weight: 680; }
+    h1 em { font-style: normal; color: #a1a5b0; }
+    .hero p { color: #a2a7b3; max-width: 570px; font-size: 16px; margin: 0; line-height: 1.75; }
+    .hero-side { border-left: 1px solid #343844; padding-left: 23px; color: #a1a6b1; font-size: 12px; max-width: 190px; }
+    .hero-side strong { color: var(--ink); display: block; font-size: 30px; letter-spacing: -.04em; line-height: 1; margin-bottom: 10px; }
+    .toolbar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 0; margin-bottom: 32px; }
+    .toolbar-copy { display: flex; align-items: center; gap: 12px; }
+    .toolbar-copy strong { font-size: 13px; }
+    .count { color: #89909d; background: #20232c; border-radius: 4px; padding: 3px 7px; font: 10px ui-monospace, monospace; }
+    .controls { display: flex; align-items: center; gap: 11px; }
+    .controls .label { font-size: 10px; letter-spacing: .08em; color: #8e94a1; text-transform: uppercase; }
+    .switch { display: flex; background: #191c24; padding: 3px; border: 1px solid #2a2e39; border-radius: 8px; }
+    .switch button { border: 0; background: transparent; color: #9da2ae; padding: 6px 12px; border-radius: 5px; font-size: 11px; cursor: pointer; }
+    .switch button[aria-pressed="true"] { background: #343a32; color: #dcf4bb; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .card { min-width: 0; background: #151820; border: 1px solid #292d38; border-radius: 12px; overflow: hidden; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; padding: 22px 23px 18px; }
+    .card-heading { display: flex; gap: 14px; align-items: flex-start; }
+    .card-number { color: #777e8d; font-size: 11px; padding-top: 5px; }
+    h2 { font-size: 17px; letter-spacing: -.025em; margin: 0 0 4px; line-height: 1.3; }
+    .description { color: #9298a6; font-size: 12px; margin: 0; }
+    .tag { white-space: nowrap; color: #aeb4c0; font-size: 9px; text-transform: uppercase; letter-spacing: .06em; border: 1px solid #343844; padding: 5px 7px; border-radius: 5px; }
+    .terminal { margin: 0 16px; border: 1px solid rgba(255,255,255,.07); border-radius: 8px; overflow: hidden; background: var(--term, #10131a); }
+    .terminal-bar { height: 37px; display: flex; align-items: center; position: relative; border-bottom: 1px solid rgba(255,255,255,.055); padding: 0 13px; }
+    .dots { display: flex; gap: 5px; }
+    .dots i { display: block; width: 7px; height: 7px; border-radius: 50%; background: #66707c; opacity: .52; }
+    .terminal-title { position: absolute; left: 50%; transform: translateX(-50%); color: #818896; font-size: 10px; white-space: nowrap; }
+    .screen { min-height: 165px; padding: 23px 20px 20px; overflow-x: auto; font: 12px/1.95 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-variant-ligatures: none; white-space: nowrap; }
+    .screen .dim { color: var(--dim, #737b89); }
+    .screen .text { color: var(--text, #c4cbd5); }
+    .screen .a { color: var(--a); }
+    .screen .b { color: var(--b); }
+    .screen .c { color: var(--c); }
+    .screen .d { color: var(--d); }
+    .screen .bright { color: var(--bright, #edf2f7); }
+    .termfold-git { color: #ff9248; }
+    body[data-git-state="clean"] .termfold-git { color: #f3c267; }
+    .harbor-line { display: flex; justify-content: space-between; gap: 3ch; min-width: max-content; }
+    .screen .space { height: 13px; }
+    .screen .prompt { font-weight: 700; }
+    .cursor { display: inline-block; vertical-align: -2px; width: 7px; height: 14px; background: var(--a); opacity: .85; }
+    .pill { display: inline-block; border-radius: 4px; padding: 0 7px; line-height: 23px; }
+    .orbit-line { display: flex; justify-content: space-between; gap: 3ch; min-width: max-content; }
+    .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 17px 23px 20px; }
+    .palette { display: flex; align-items: center; gap: 5px; }
+    .palette i { width: 12px; height: 12px; border-radius: 50%; background: var(--swatch); border: 1px solid rgba(255,255,255,.12); }
+    .features { color: #8d94a2; font-size: 10px; text-align: right; }
+    .legend { margin: 32px 0 0; color: #9298a6; font-size: 12px; line-height: 1.7; }
+    .legend strong { color: #d7dbe3; font-weight: 600; }
+    footer { border-top: 1px solid var(--border); margin-top: 64px; }
+    .footer-inner { min-height: 84px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footnote { font-size: 10px; color: #838a98; }
+    .footnote a { color: #c9d0dc; text-decoration-color: #606774; text-underline-offset: 3px; }
+    @media (max-width: 900px) { .wrap { padding: 0 24px; } .grid { grid-template-columns: 1fr; } .hero { padding: 58px 0 46px; } }
+    @media (max-width: 550px) { .wrap { padding: 0 16px; } .nav-note { display: none; } .hero { grid-template-columns: 1fr; gap: 25px; } .hero-side { display: none; } .toolbar { align-items: flex-start; flex-direction: column; } .card-top { padding: 18px 17px 15px; } .card-bottom { padding: 15px 17px 18px; } .tag { font-size: 8px; } .screen { padding-left: 14px; } .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; gap: 8px; } }
+  </style>
+</head>
+<body data-git-state="dirty">
+  <header><div class="wrap nav"><div class="brand"><span class="brand-mark">›_</span> Prompt Studio</div><div class="nav-note"><span>●</span> THEME COLLECTION &nbsp;/&nbsp; OH MY POSH</div></div></header>
+  <main class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow">A collection for your command line</div><h1>A better place<br>to <em>begin.</em></h1><p>Explore the themes in this folder. Compare the colors, layouts, and Git details.</p></div>
+      <div class="hero-side"><strong>15 / 15</strong>Theme files.<br>Ready to use.</div>
+    </section>
+    <div class="toolbar">
+      <div class="toolbar-copy"><strong>Explore the collection</strong><span class="count">15 PREVIEWS</span></div>
+      <div class="controls"><span class="label">Git state</span><div class="switch" role="group" aria-label="Simulated Git state"><button type="button" data-state="dirty" aria-pressed="true">Changes</button><button type="button" data-state="clean" aria-pressed="false">Clean</button></div></div>
+    </div>
+    <div class="grid">
+      <article class="card" style="--term:#101922;--a:#7ce2d2;--b:#82aaff;--c:#c3b1ff;--d:#f5a3c2;--dim:#718696">
+        <div class="card-top"><div class="card-heading"><span class="card-number">01</span><div><h2>Harbor</h2><p class="description">A calm, nautical prompt with a clear horizon.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">harbor — zsh</span></div><div class="screen"><div class="harbor-line"><span><span class="a">~/projects/atlas</span> <span class="b">feature/search</span> <span class="c git-state" data-dirty=" 2  3  1" data-clean=""> 2  3  1</span> <span class="d">node 22.11.0</span></span><span class="dim">1.2s</span></div><div class="space"></div><div><span class="b prompt">❯</span> <span class="bright">npm run dev</span></div><div><span class="dim">  ready on localhost:3000</span></div><div><span class="b prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#101922"></i><i style="--swatch:#7ce2d2"></i><i style="--swatch:#82aaff"></i><i style="--swatch:#c3b1ff"></i><i style="--swatch:#f5a3c2"></i></div><div class="features">PATH · GIT · NODE · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#1b1721;--a:#f2a0a9;--b:#d0b1ed;--c:#f8c892;--dim:#8d7f90">
+        <div class="card-top"><div class="card-heading"><span class="card-number">02</span><div><h2>Afterglow</h2><p class="description">Soft sunset tones, framed like a conversation.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">afterglow — zsh</span></div><div class="screen"><div><span class="dim">╭─</span> <span class="a">~/projects/atlas</span> <span class="dim">──</span> <span class="b"> feature/search</span> <span class="c git-state" data-dirty=" 3  1  2" data-clean=""> 3  1  2</span></div><div><span class="dim">│</span>  <span class="c">node 22.11.0</span> <span class="dim">· 1.2s</span></div><div><span class="dim">╰─</span> <span class="a prompt">❯</span> <span class="bright">git status -sb</span></div><div><span class="dim">   ## feature/search</span></div><div><span class="dim">╰─</span> <span class="a prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#1b1721"></i><i style="--swatch:#f2a0a9"></i><i style="--swatch:#d0b1ed"></i><i style="--swatch:#f8c892"></i></div><div class="features">PATH · GIT · NODE · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#101512;--a:#c8f374;--b:#96dba6;--c:#e4c981;--dim:#788b7b">
+        <div class="card-top"><div class="card-heading"><span class="card-number">03</span><div><h2>Fieldwork</h2><p class="description">A little outdoors, a lot of focus.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">fieldwork — zsh</span></div><div class="screen"><div><span class="a">atlas</span> <span class="dim">/</span> <span class="b"> feature/search</span> <span class="c git-state" data-dirty="[~3 +1 ↑2]" data-clean="[clean]">[~3 +1 ↑2]</span> <span class="dim">/</span> <span class="b">python 3.12.7</span></div><div><span class="a prompt">›</span> <span class="bright">python -m pytest</span></div><div><span class="dim">  24 passed in 1.20s</span></div><div class="space"></div><div><span class="a">atlas</span> <span class="dim">/</span> <span class="b"> feature/search</span> <span class="c git-state" data-dirty="[~3 +1 ↑2]" data-clean="[clean]">[~3 +1 ↑2]</span> <span class="dim">/</span> <span class="b">python 3.12.7</span></div><div><span class="a prompt">›</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#101512"></i><i style="--swatch:#c8f374"></i><i style="--swatch:#96dba6"></i><i style="--swatch:#e4c981"></i></div><div class="features">FOLDER · GIT · PYTHON</div></div>
+      </article>
+      <article class="card" style="--term:#10111d;--a:#9f9bff;--b:#69d8f1;--c:#ffb5d5;--dim:#777b9a">
+        <div class="card-top"><div class="card-heading"><span class="card-number">04</span><div><h2>Orbit</h2><p class="description">A little cosmic, with connected powerline segments.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">orbit — zsh</span></div><div class="screen"><div class="orbit-line"><span><span style="color:#29254d"></span><span style="background:#29254d;color:#d4d0ff"> ~/projects/atlas </span><span style="color:#29254d;background:#153740"></span><span style="background:#153740;color:#8ce4f2">  feature/search </span><span style="color:#153740;background:#492b41"></span><span class="git-state" style="background:#492b41;color:#ffc4dc" data-dirty=" ~3 +1 ↑2 " data-clean=" ✓ "> ~3 +1 ↑2 </span><span style="color:#492b41"></span> <span class="dim">node 22.11.0</span></span><span class="dim">1.2s</span></div><div class="space"></div><div><span class="a prompt">✦ ❯</span> <span class="bright">npm test</span></div><div><span class="dim">    12 tests passed</span></div><div><span class="a prompt">✦ ❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#10111d"></i><i style="--swatch:#9f9bff"></i><i style="--swatch:#69d8f1"></i><i style="--swatch:#ffb5d5"></i></div><div class="features">PATH · GIT · NODE · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#191511;--a:#e8a96b;--b:#e6cf9a;--c:#b7c98d;--dim:#958979">
+        <div class="card-top"><div class="card-heading"><span class="card-number">05</span><div><h2>Copperline</h2><p class="description">Warm metal and parchment, built for long sessions.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">copperline — zsh</span></div><div class="screen"><div><span style="color:#c78c55"></span><span style="background:#c78c55;color:#1b1510"> ~/projects/atlas </span><span style="color:#c78c55;background:#584331"></span><span style="background:#584331;color:#f5ddbd">  feature/search </span><span style="color:#584331"></span></div><div><span class="c git-state" data-dirty="~3  +1 staged  ↑2 ahead" data-clean="✓ clean">~3  +1 staged  ↑2 ahead</span> <span class="dim">· go 1.23.3</span></div><div class="space"></div><div><span class="a prompt">❯</span> <span class="bright">go test ./...</span></div><div><span class="dim">  ok   atlas/api   0.84s</span></div><div><span class="a prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#191511"></i><i style="--swatch:#e8a96b"></i><i style="--swatch:#e6cf9a"></i><i style="--swatch:#b7c98d"></i></div><div class="features">PATH · GIT · GO</div></div>
+      </article>
+      <article class="card" style="--term:#111821;--a:#84c9ff;--b:#b5c8d9;--c:#91e4c3;--dim:#7c8f9e">
+        <div class="card-top"><div class="card-heading"><span class="card-number">06</span><div><h2>Northstar</h2><p class="description">Cool, understated, and easy to scan.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">northstar — zsh</span></div><div class="screen"><div><span class="a">✧ ~/projects/atlas</span> <span class="dim">············</span> <span class="b">14:32</span></div><div><span class="b">   feature/search</span> <span class="c git-state" data-dirty="~3 +1 ↑2" data-clean="✓ clean">~3 +1 ↑2</span> <span class="dim">|</span> <span class="a">go 1.23.3</span></div><div class="space"></div><div><span class="a prompt">  ❯</span> <span class="bright">go build ./...</span></div><div><span class="dim">  completed in 1.2s</span></div><div><span class="a prompt">  ❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#111821"></i><i style="--swatch:#84c9ff"></i><i style="--swatch:#b5c8d9"></i><i style="--swatch:#91e4c3"></i></div><div class="features">PATH · GIT · GO · TIME</div></div>
+      </article>
+      <article class="card" style="--term:#17141a;--a:#ff83ac;--b:#f6cb78;--c:#a6e3bc;--dim:#91838e">
+        <div class="card-top"><div class="card-heading"><span class="card-number">07</span><div><h2>Sidequest</h2><p class="description">Playful color and a little arcade energy.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">sidequest — zsh</span></div><div class="screen"><div><span class="a">◆</span> <span class="bright">atlas</span> <span class="dim">/</span> <span class="b"> feature/search</span> <span class="a git-state" data-dirty="● ~3 +1 ↑2" data-clean="● clean">● ~3 +1 ↑2</span></div><div><span class="dim">  └</span> <span class="c">node 22.11.0</span> <span class="dim">· last command 1.2s</span></div><div class="space"></div><div><span class="a prompt">  »</span> <span class="bright">npm run build</span></div><div><span class="dim">    build complete ✨</span></div><div><span class="a prompt">  »</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#17141a"></i><i style="--swatch:#ff83ac"></i><i style="--swatch:#f6cb78"></i><i style="--swatch:#a6e3bc"></i></div><div class="features">FOLDER · GIT · NODE · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#14171c;--a:#e0e5e9;--b:#a5bdd0;--c:#b8d5b5;--dim:#838f99">
+        <div class="card-top"><div class="card-heading"><span class="card-number">08</span><div><h2>Blueprint</h2><p class="description">Architectural lines for a quieter workspace.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">blueprint — zsh</span></div><div class="screen"><div><span class="dim">┌─</span> <span class="a">~/projects/atlas</span> <span class="dim">────────────────</span></div><div><span class="dim">│</span>  <span class="b">git</span>  <span class="text"> feature/search</span> <span class="c git-state" data-dirty="~3 +1 ↑2" data-clean="✓ clean">~3 +1 ↑2</span></div><div><span class="dim">│</span>  <span class="b">env</span>  <span class="text">python 3.12.7</span></div><div><span class="dim">└─</span> <span class="a prompt">›</span> <span class="bright">python app.py</span></div><div><span class="dim">   server running on :8000</span></div><div><span class="dim">└─</span> <span class="a prompt">›</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#14171c"></i><i style="--swatch:#e0e5e9"></i><i style="--swatch:#a5bdd0"></i><i style="--swatch:#b8d5b5"></i></div><div class="features">PATH · GIT · PYTHON</div></div>
+      </article>
+      <article class="card" style="--term:#18171a;--a:#e9a98c;--b:#dfc6a9;--c:#a7c7bc;--dim:#9a8f8b">
+        <div class="card-top"><div class="card-heading"><span class="card-number">09</span><div><h2>Terracotta</h2><p class="description">Earthy, editorial, and quietly confident.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">terracotta — zsh</span></div><div class="screen"><div><span class="dim">in</span> <span class="a">~/projects/atlas</span> <span class="dim">on</span> <span class="b"> feature/search</span></div><div><span class="dim">git</span> <span class="c git-state" data-dirty="~3 · 1 staged · 2 ahead" data-clean="clean">~3 · 1 staged · 2 ahead</span></div><div><span class="dim">via</span> <span class="b">python 3.12.7</span> <span class="dim">· 1.2s</span></div><div class="space"></div><div><span class="a prompt">❯</span> <span class="bright">python -m pytest</span></div><div><span class="a prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#18171a"></i><i style="--swatch:#e9a98c"></i><i style="--swatch:#dfc6a9"></i><i style="--swatch:#a7c7bc"></i></div><div class="features">PATH · GIT · PYTHON · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#10161a;--a:#52e0ca;--b:#a0dfff;--c:#f0db89;--dim:#7a9296">
+        <div class="card-top"><div class="card-heading"><span class="card-number">10</span><div><h2>Signal</h2><p class="description">High-contrast status, without the noise.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">signal — zsh</span></div><div class="screen"><div><span class="a">▌</span> <span class="bright">~/projects/atlas</span> <span class="dim">│</span> <span class="b"> feature/search</span></div><div><span class="a">▌</span> <span class="c git-state" data-dirty="~3 +1 ↑2" data-clean="✓ clean">~3 +1 ↑2</span> <span class="dim">│</span> <span class="b">go 1.23.3</span> <span class="dim">│ 1.2s</span></div><div class="space"></div><div><span class="a prompt">▸</span> <span class="bright">git diff --stat</span></div><div><span class="dim">  3 files changed</span></div><div><span class="a prompt">▸</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#10161a"></i><i style="--swatch:#52e0ca"></i><i style="--swatch:#a0dfff"></i><i style="--swatch:#f0db89"></i></div><div class="features">PATH · GIT · GO · DURATION</div></div>
+      </article>
+      <article class="card" style="--term:#1e1e2e;--a:#ea76cb;--b:#7287fd;--c:#ea76cb;--dim:#8d91a5">
+        <div class="card-top"><div class="card-heading"><span class="card-number">11</span><div><h2>Catpuccin</h2><p class="description">Pastel path, branch, and contextual tools.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">catpuccin — zsh</span></div><div class="screen"><div><span class="a">~/projects/atlas</span> <span class="b"> feature/search</span> <span class="a"> 1.23.3</span></div><div><span class="b prompt">❯</span> <span class="bright">go test ./...</span></div><div><span class="dim">  ok   atlas/api   0.84s</span></div><div class="space"></div><div><span class="a">~/projects/atlas</span> <span class="b"> feature/search</span> <span class="a"> 1.23.3</span></div><div><span class="b prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#1e1e2e"></i><i style="--swatch:#ea76cb"></i><i style="--swatch:#7287fd"></i></div><div class="features">PATH · BRANCH · CONTEXTUAL TOOLS</div></div>
+      </article>
+      <article class="card" style="--term:#101a20;--a:#0ca0d8;--b:#14a5ae;--c:#7fd5ea;--dim:#82939d">
+        <div class="card-top"><div class="card-heading"><span class="card-number">12</span><div><h2>Greenfold</h2><p class="description">A simple path and branch in cool blue.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">greenfold — zsh</span></div><div class="screen"><div><span class="a"> ~/projects/atlas</span> <span class="b">   feature/search</span></div><div><span class="c prompt">❯</span> <span class="bright">git status -sb</span></div><div><span class="dim">  ## feature/search</span></div><div class="space"></div><div><span class="a"> ~/projects/atlas</span> <span class="b">   feature/search</span></div><div><span class="c prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#101a20"></i><i style="--swatch:#0ca0d8"></i><i style="--swatch:#14a5ae"></i><i style="--swatch:#7fd5ea"></i></div><div class="features">PATH · BRANCH · STASH</div></div>
+      </article>
+      <article class="card" style="--term:#15191f;--a:#55b9c4;--b:#b4befe;--c:#98c379;--d:#007acc;--dim:#929baa">
+        <div class="card-top"><div class="card-heading"><span class="card-number">13</span><div><h2>Purestar</h2><p class="description">Detailed Git changes with a Node version.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">purestar — zsh</span></div><div class="screen"><div><span class="a">~/projects/atlas</span> <span class="bright">on</span> <span class="b"> feature/search <span class="git-state" data-dirty="≡  ~3 |  +1" data-clean="≡">≡  ~3 |  +1</span></span> <span class="bright">via</span> <span class="c"> 22.11.0</span></div><div><span class="d prompt">❯</span> <span class="bright">npm test</span></div><div><span class="dim">  12 tests passed</span></div><div class="space"></div><div><span class="a">~/projects/atlas</span> <span class="bright">on</span> <span class="b"> feature/search <span class="git-state" data-dirty="≡  ~3 |  +1" data-clean="≡">≡  ~3 |  +1</span></span> <span class="bright">via</span> <span class="c"> 22.11.0</span></div><div><span class="d prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#15191f"></i><i style="--swatch:#55b9c4"></i><i style="--swatch:#b4befe"></i><i style="--swatch:#98c379"></i><i style="--swatch:#007acc"></i></div><div class="features">PATH · GIT · NODE · STATUS</div></div>
+      </article>
+      <article class="card" style="--term:#15171e;--a:#00ffff;--b:#ff94df;--c:#ff94df;--dim:#8f98a6">
+        <div class="card-top"><div class="card-heading"><span class="card-number">14</span><div><h2>Pwsh</h2><p class="description">OS, path, and branch with a pink prompt.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">pwsh — zsh</span></div><div class="screen"><div><span class="a"> ~/projects/atlas</span> <span class="bright">on</span> <span class="b"> feature/search</span></div><div><span class="b prompt">❯</span> <span class="bright">git status -sb</span></div><div><span class="dim">  ## feature/search</span></div><div class="space"></div><div><span class="a"> ~/projects/atlas</span> <span class="bright">on</span> <span class="b"> feature/search</span></div><div><span class="b prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#15171e"></i><i style="--swatch:#00ffff"></i><i style="--swatch:#ff94df"></i></div><div class="features">OS · PATH · BRANCH · STATUS</div></div>
+      </article>
+      <article class="card" style="--term:#15191f;--a:#e06c75;--b:#61afef;--c:#f3c267;--dim:#919aa7">
+        <div class="card-top"><div class="card-heading"><span class="card-number">15</span><div><h2>Termfold</h2><p class="description">Shell, folder, and detailed Git context.</p></div></div><span class="tag">Theme file</span></div>
+        <div class="terminal"><div class="terminal-bar"><span class="dots"><i></i><i></i><i></i></span><span class="terminal-title">termfold — zsh</span></div><div class="screen"><div><span class="a"> zsh</span> <span class="b"> ~/projects/atlas</span> <span class="termfold-git"> feature/search <span class="git-state" data-dirty="≡  ~3 |  +1" data-clean="≡">≡  ~3 |  +1</span></span></div><div><span class="a prompt">❯</span> <span class="bright">git status -sb</span></div><div><span class="dim">  ## feature/search</span></div><div class="space"></div><div><span class="a"> zsh</span> <span class="b"> ~/projects/atlas</span> <span class="termfold-git"> feature/search <span class="git-state" data-dirty="≡  ~3 |  +1" data-clean="≡">≡  ~3 |  +1</span></span></div><div><span class="a prompt">❯</span> <span class="cursor"></span></div></div></div>
+        <div class="card-bottom"><div class="palette"><i style="--swatch:#15191f"></i><i style="--swatch:#e06c75"></i><i style="--swatch:#61afef"></i><i style="--swatch:#f3c267"></i><i style="--swatch:#ff9248"></i></div><div class="features">SHELL · PATH · GIT · STASH</div></div>
+      </article>
+    </div>
+    <p class="legend"><strong>Reading the previews</strong> &nbsp; branch &nbsp;·&nbsp;  or ~ modified &nbsp;·&nbsp;  or + staged &nbsp;·&nbsp;  or ↑ commits ahead. The terminal output, Git state, and runtime versions are illustrative; these are mockups, not live prompts. The Git switch changes status examples only; Catpuccin, Greenfold, and Pwsh do not show working-tree changes. Icons require a Nerd Font.</p>
+  </main>
+  <footer><div class="wrap footer-inner"><div class="footnote">PROMPT STUDIO &nbsp; / &nbsp; DESIGNED FOR OH MY POSH</div><div class="footnote">ILLUSTRATIVE PREVIEWS &nbsp;·&nbsp; <a href="https://ohmyposh.dev/">OH MY POSH ↗</a></div></div></footer>
+  <script>
+    document.querySelectorAll('[data-state]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var state = button.dataset.state;
+        document.body.dataset.gitState = state;
+        document.querySelectorAll('[data-state]').forEach(function (item) {
+          item.setAttribute('aria-pressed', String(item === button));
+        });
+        document.querySelectorAll('.git-state').forEach(function (item) {
+          item.textContent = item.dataset[state];
+        });
+      });
+    });
+  </script>
+</body>
+</html>

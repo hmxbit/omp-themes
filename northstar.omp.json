@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#84c9ff",
+          "template": "✧ {{ .Path }} ",
+          "options": { "style": "full" }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "filler": "<#7c8f9e>·</>",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "#b5c8d9",
+          "template": " {{ .CurrentDate | date .Format }}",
+          "options": { "time_format": "15:04" }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#b5c8d9",
+          "template": "  {{ .HEAD }}<#91e4c3>{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Unmerged }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} ✓ clean{{ end }}</>",
+          "options": { "branch_icon": " ", "fetch_status": true }
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "#84c9ff",
+          "template": "{{ if .Segments.Contains \"Git\" }} <#7c8f9e>|</> {{ else }}  {{ end }}go {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        { "type": "text", "style": "plain", "foreground": "#84c9ff", "template": "  ❯" }
+      ]
+    }
+  ]
+}

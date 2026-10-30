@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "path", "style": "plain", "foreground": "#edf2f7", "template": "<#ff83ac>◆</> {{ .Path }}", "options": { "style": "folder" } },
+      { "type": "git", "style": "plain", "foreground": "#f6cb78", "template": " <#91838e>/</> {{ .HEAD }} <#ff83ac>●{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Unmerged }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} clean{{ end }}</>", "options": { "branch_icon": " ", "fetch_status": true } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "node", "style": "plain", "foreground": "#a6e3bc", "template": "<#91838e>  └</> node {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}" },
+      { "type": "executiontime", "style": "plain", "foreground": "#91838e", "template": "{{ if .Segments.Contains \"Node\" }} · {{ else }}  └ {{ end }}last command {{ .FormattedMs }}", "options": { "threshold": 500, "style": "austin" } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "text", "style": "plain", "foreground": "#ff83ac", "template": "  »" }
+    ] }
+  ]
+}

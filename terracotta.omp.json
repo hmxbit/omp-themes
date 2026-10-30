@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "path", "style": "plain", "foreground": "#e9a98c", "template": "<#9a8f8b>in</> {{ .Path }}", "options": { "style": "full" } },
+      { "type": "git", "style": "plain", "foreground": "#dfc6a9", "template": " <#9a8f8b>on</> {{ .HEAD }}", "options": { "branch_icon": " " } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "git", "style": "plain", "foreground": "#a7c7bc", "template": "<#9a8f8b>git</>{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}{{ if .Working.Changed }} ·{{ end }} {{ add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Unmerged }} staged{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} clean{{ end }}{{ if gt .Ahead 0 }} · {{ .Ahead }} ahead{{ end }}{{ if gt .Behind 0 }} · {{ .Behind }} behind{{ end }}", "options": { "fetch_status": true } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "python", "style": "plain", "foreground": "#dfc6a9", "template": "<#9a8f8b>via</> python {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}", "options": { "display_mode": "context" } },
+      { "type": "executiontime", "style": "plain", "foreground": "#9a8f8b", "template": "{{ if .Segments.Contains \"Python\" }} · {{ end }}{{ .FormattedMs }}", "options": { "threshold": 500, "style": "austin" } }
+    ] },
+    { "type": "prompt", "alignment": "left", "newline": true, "segments": [
+      { "type": "text", "style": "plain", "foreground": "#e9a98c", "template": "❯" }
+    ] }
+  ]
+}

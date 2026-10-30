@@ -23,6 +23,7 @@
         {
           "foreground": "#B4BEFE",
           "properties": {
+            "branch_icon": "\ue725 ",
             "fetch_status": true
           },
           "style": "plain",

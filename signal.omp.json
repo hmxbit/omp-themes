@@ -1,0 +1,64 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#edf2f7",
+          "template": "<#52e0ca>▌</> {{ .Path }}",
+          "options": { "style": "full" }
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#a0dfff",
+          "template": " <#7a9296>│</> {{ .HEAD }}",
+          "options": { "branch_icon": " " }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        { "type": "text", "style": "plain", "foreground": "#52e0ca", "template": "▌" },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#f0db89",
+          "template": "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ add .Staging.Added .Staging.Modified .Staging.Deleted .Staging.Unmerged }}{{ end }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if not (or .Working.Changed .Staging.Changed) }} ✓ clean{{ end }}",
+          "options": { "fetch_status": true }
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "#a0dfff",
+          "template": "{{ if .Segments.Contains \"Git\" }} <#7a9296>│</>{{ end }} go {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "#7a9296",
+          "template": "{{ if or (.Segments.Contains \"Git\") (.Segments.Contains \"Go\") }} │{{ end }} {{ .FormattedMs }}",
+          "options": { "threshold": 500, "style": "austin" }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        { "type": "text", "style": "plain", "foreground": "#52e0ca", "template": "▸" }
+      ]
+    }
+  ]
+}
